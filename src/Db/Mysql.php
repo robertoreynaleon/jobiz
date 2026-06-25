@@ -63,9 +63,13 @@ class Mysql
             // L'user et le mot de passe sont passés en paramètres du constructeur de la classe PDO
 
                 $this->pdo = new \PDO(
-                    "mysql:host={$this->dbHost};dbname={$this->dbName};port={$this->dbPort}",
+                    "mysql:host={$this->dbHost};dbname={$this->dbName};port={$this->dbPort};charset=utf8mb4",
                     $this->dbUser,
-                    $this->dbPassword
+                    $this->dbPassword,
+                    [
+                        \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+                        \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
+                    ]
                 );
             }
         return $this->pdo;

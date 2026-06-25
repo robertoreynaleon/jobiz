@@ -58,7 +58,8 @@ require_once APP_ROOT . "/templates/header.php";
             <div class="jobs-count">
                 <h2><?= isset($jobs) ? count($jobs) : 0 ?> offre(s) d'emploi trouvée(s)</h2>
             </div>
-            <div class="jobs-sort">
+            <div class="jobs-sort jobs-toolbar">
+                <a href="/job/create/" class="btn btn-primary">Créer une offre</a>
                 <select id="sort" name="sort" onchange="location = this.value;">
                     <option value="?sort=date_desc">Plus récentes</option>
                     <option value="?sort=date_asc">Plus anciennes</option>
@@ -76,12 +77,20 @@ require_once APP_ROOT . "/templates/header.php";
 
                         <div class="job-card-body">
                             <h3 class="job-title">
-                                <a href="/jobs/<?= $job->getId() ?>/"><?= htmlspecialchars($job->getTitle() ?? 'Titre non disponible') ?></a>
+                                <a href="/job/?id=<?= $job->getId() ?>"><?= htmlspecialchars($job->getTitle() ?? 'Titre non disponible') ?></a>
                             </h3>
                             <p class="job-description">
                                 <?= substr(htmlspecialchars($job->getDescription() ?? 'Description non disponible'), 0, 150) ?>
                                 <?= strlen($job->getDescription() ?? '') > 150 ? '...' : '' ?>
-                            </p>    
+                            </p>
+                            <div class="job-tags">
+                                <?php if ($job->getCategoryName()): ?>
+                                    <span class="job-tag category"><?= htmlspecialchars($job->getCategoryName()) ?></span>
+                                <?php endif; ?>
+                                <?php if ($job->getSalary()): ?>
+                                    <span class="job-tag salary"><?= number_format($job->getSalary(), 0, ',', ' ') ?> €</span>
+                                <?php endif; ?>
+                            </div>
                         </div>
 
                         <div class="job-card-footer">
@@ -94,6 +103,13 @@ require_once APP_ROOT . "/templates/header.php";
                                 <a href="/job/?id=<?=$job->getId()?>" class="btn btn-primary">
                                     Voir l'offre
                                 </a>
+                                <a href="/job/edit/?id=<?=$job->getId()?>" class="btn btn-secondary">
+                                    Modifier
+                                </a>
+                                <form method="POST" action="/job/delete/" onsubmit="return confirm('Supprimer cette offre ?');">
+                                    <input type="hidden" name="id" value="<?= $job->getId() ?>">
+                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                </form>
                             </div>
                         </div>
                     </div>

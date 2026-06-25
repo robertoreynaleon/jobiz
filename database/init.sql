@@ -8,9 +8,11 @@ CREATE TABLE IF NOT EXISTS job (
     title VARCHAR(150) NOT NULL,
     description TEXT NOT NULL,
     salary DECIMAL(10, 2) DEFAULT NULL,
+    category_id INT UNSIGNED DEFAULT NULL,
     country_id INT UNSIGNED DEFAULT NULL,
     company_id INT UNSIGNED DEFAULT NULL,
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_job_category FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO category (name) VALUES
@@ -20,8 +22,8 @@ INSERT INTO category (name) VALUES
     ('Data')
 ON DUPLICATE KEY UPDATE name = VALUES(name);
 
-INSERT INTO job (title, description, salary, created_at) VALUES
-    ('Developpeur PHP junior', 'Participation au developpement et a la maintenance de sites web en PHP POO avec MySQL.', 32000.00, NOW()),
-    ('Integrateur HTML CSS', 'Integration de maquettes responsives en HTML et CSS pour une plateforme de recrutement.', 28000.00, NOW()),
-    ('Developpeur fullstack', 'Creation de fonctionnalites front et back pour une application de recherche d emploi.', 42000.00, NOW())
+INSERT INTO job (title, description, salary, category_id, created_at) VALUES
+    ('Developpeur PHP junior', 'Participation au developpement et a la maintenance de sites web en PHP POO avec MySQL.', 32000.00, 1, NOW()),
+    ('Integrateur HTML CSS', 'Integration de maquettes responsives en HTML et CSS pour une plateforme de recrutement.', 28000.00, 2, NOW()),
+    ('Developpeur fullstack', 'Creation de fonctionnalites front et back pour une application de recherche d emploi.', 42000.00, 1, NOW())
 ON DUPLICATE KEY UPDATE title = VALUES(title);

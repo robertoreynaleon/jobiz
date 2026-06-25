@@ -10,6 +10,8 @@ class Job extends Entity
     protected ?string $title = null;
     protected ?string $description = null;
     protected ?float $salary = null;
+    protected ?int $categoryId = null;
+    protected ?string $categoryName = null;
     protected ?int $countryId = null;
     protected ?int $companyID = null;
     protected ?DateTimeImmutable $createdAt = null; // DateTimeImmutable permet de gérer les dates de manière immuable.
@@ -38,6 +40,16 @@ class Job extends Entity
     public function getSalary(): ?float
     {
         return $this->salary;
+    }
+
+    public function getCategoryId(): ?int
+    {
+        return $this->categoryId;
+    }
+
+    public function getCategoryName(): ?string
+    {
+        return $this->categoryName;
     }
 
     public function getCountryId(): ?int
@@ -73,6 +85,16 @@ class Job extends Entity
     public function setSalary(?float $salary): void
     {
         $this->salary = $salary;
+    }
+
+    public function setCategoryId(?int $categoryId): void
+    {
+        $this->categoryId = $categoryId;
+    }
+
+    public function setCategoryName(?string $categoryName): void
+    {
+        $this->categoryName = $categoryName;
     }
 
     public function setCountryId(?int $countryId): void

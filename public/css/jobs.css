@@ -124,6 +124,12 @@
     cursor: pointer;
 }
 
+.jobs-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
 /* Jobs Grid */
 .jobs-grid {
     display: grid;
@@ -265,6 +271,11 @@
 .job-actions {
     display: flex;
     gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.job-actions form {
+    margin: 0;
 }
 
 /* Buttons */
@@ -301,6 +312,67 @@
 .btn-secondary:hover {
     background: #e9ecef;
     color: #333;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #bb2d3b;
+    transform: translateY(-1px);
+}
+
+.job-form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    border: 1px solid #f1f3f4;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #555;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    padding: 12px 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
 }
 
 /* No Jobs State */
@@ -398,6 +470,14 @@
     .jobs-header {
         flex-direction: column;
         gap: 1rem;
+        align-items: stretch;
+    }
+
+    .jobs-toolbar,
+    .form-row,
+    .form-actions {
+        grid-template-columns: 1fr;
+        flex-direction: column;
         align-items: stretch;
     }
 }
